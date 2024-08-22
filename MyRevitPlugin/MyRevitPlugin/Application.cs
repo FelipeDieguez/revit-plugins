@@ -23,53 +23,49 @@ namespace MyRevitPlugin
         // Method executed when the plugin is started.
         public Result OnStartup(UIControlledApplication application)
         {
-            RibbonPanel panel = RibbonPanel(application);
+            // Define the tab name where the panels will be created.
+            string tabName = "FX";
+
+            // Attempt to create the tab if it doesn't exist.
+            try
+            {
+                application.CreateRibbonTab(tabName);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Tab already exists: " + ex.Message);
+            }
+
+            // Create the first panel on the tab.
+            RibbonPanel panel1 = application.CreateRibbonPanel(tabName, "General");
+
+            // Create the second panel on the tab.
+            RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Advanced");
+
+            // Get the path of the current assembly.
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            if (panel.AddItem(new PushButtonData("Informações", "Informações", thisAssemblyPath, "MyRevitPlugin.Command"))
-                is PushButton button)
-            {
-                button.ToolTip = "Informações gerais sobre o plugin";
+            // Add a button to the first panel.
+            PushButtonData buttonData1 = new PushButtonData("Info", "Info", thisAssemblyPath, "MyRevitPlugin.Command");
+            PushButton button1 = panel1.AddItem(buttonData1) as PushButton;
+            button1.ToolTip = "General information about the plugin";
 
-                Uri uri = new Uri(@"D:\PROGRAMAÇÃO (GIT)\myrevitplugin\MyRevitPlugin\MyRevitPlugin\Resources\information.png");
-                //Uri uri = new Uri(Path.Combine(Path.GetDirectoryName(thisAssemblyPath), "Resources", "information.png"));
-                BitmapImage bitmap = new BitmapImage(uri);
-                button.LargeImage = bitmap;
-            }
+            // Set the icon for the first button.
+            Uri uri1 = new Uri(@"D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\Resources\information.png");
+            BitmapImage bitmap1 = new BitmapImage(uri1);
+            button1.LargeImage = bitmap1;
+
+            // Add a second button to the second panel.
+            PushButtonData buttonData2 = new PushButtonData("Settings", "Settings", thisAssemblyPath, "MyRevitPlugin.Command");
+            PushButton button2 = panel2.AddItem(buttonData2) as PushButton;
+            button2.ToolTip = "Plugin settings";
+
+            // Set the icon for the second button.
+            Uri uri2 = new Uri(@"D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\Resources\information.png");
+            BitmapImage bitmap2 = new BitmapImage(uri2);
+            button2.LargeImage = bitmap2;
 
             return Result.Succeeded;
-        }
-
-        public RibbonPanel RibbonPanel(UIControlledApplication a)
-        {
-            string tab = "FX";
-            RibbonPanel ribbonPanel = null;
-
-            try
-            {
-                a.CreateRibbonTab(tab);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            try
-            {
-                a.CreateRibbonPanel(tab, "Geral");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            List<RibbonPanel> panels = a.GetRibbonPanels(tab);
-            foreach (RibbonPanel p in panels.Where(p => p.Name == "Geral"))
-            {
-                ribbonPanel = p;
-            }
-
-            return ribbonPanel;
         }
     }
 }
