@@ -22,7 +22,7 @@ namespace MyRevitPlugin
             var uidoc = uiapp.ActiveUIDocument;
             var doc = uidoc.Document;
 
-            TaskDialog.Show("Fx", "Testando o plugin");
+            TaskDialog.Show("Fx", "Essa funcionalidade ainda está em desenvolvimento.");
 
             return Result.Succeeded;
         }

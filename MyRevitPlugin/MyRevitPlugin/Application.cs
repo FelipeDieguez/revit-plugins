@@ -26,7 +26,6 @@ namespace MyRevitPlugin
             // Define the tab name where the panels will be created.
             string tabName = "FX";
 
-            //testing
             // Attempt to create the tab if it doesn't exist.
             try
             {
@@ -37,36 +36,101 @@ namespace MyRevitPlugin
                 Debug.WriteLine("Tab already exists: " + ex.Message);
             }
 
-            // Create the first panel on the tab.
-            RibbonPanel panel1 = application.CreateRibbonPanel(tabName, "General");
+            // Add Panels
+            CreateGeneralPanel(application, tabName);
+            CreateModelPanel(application, tabName);
+            CreateDetailPanel(application, tabName);
+            CreateTablePanel(application, tabName);
+            CreatePlotPanel(application, tabName);
 
-            // Create the second panel on the tab.
-            RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Advanced");
+            return Result.Succeeded;
+        }
 
+        void CreateButton(RibbonPanel panel, string assemblyPath, string buttonName, string buttonClass, string buttonDescription, string buttonImage)
+        {
+            // Add button to the panel
+            PushButtonData buttonData = new PushButtonData(buttonName, buttonName, assemblyPath, buttonClass);
+            PushButton button = panel.AddItem(buttonData) as PushButton;
+            button.ToolTip = buttonDescription;
+
+            Uri uri = new Uri(Path.Combine(@"D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\Resources\", buttonImage));
+            BitmapImage bitmap = new BitmapImage(uri);
+            button.LargeImage = bitmap;
+        }
+
+        void CreateGeneralPanel(UIControlledApplication application, string tabName)
+        {
             // Get the path of the current assembly.
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            // Add a button to the first panel.
-            PushButtonData buttonData1 = new PushButtonData("Info", "Info", thisAssemblyPath, "MyRevitPlugin.Command");
-            PushButton button1 = panel1.AddItem(buttonData1) as PushButton;
-            button1.ToolTip = "General information about the plugin";
+            // Create a panel on the tab
+            RibbonPanel generalPanel = application.CreateRibbonPanel(tabName, "General");
 
-            // Set the icon for the first button.
-            Uri uri1 = new Uri(@"D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\Resources\information.png");
-            BitmapImage bitmap1 = new BitmapImage(uri1);
-            button1.LargeImage = bitmap1;
+            // Add buttons to the panel
+            CreateButton(generalPanel, thisAssemblyPath, "Info", "MyRevitPlugin.Command", "Informations about FX plugin", "info.png");
+        }
 
-            // Add a second button to the second panel.
-            PushButtonData buttonData2 = new PushButtonData("Settings", "Settings", thisAssemblyPath, "MyRevitPlugin.Command");
-            PushButton button2 = panel2.AddItem(buttonData2) as PushButton;
-            button2.ToolTip = "Plugin settings";
+        void CreateModelPanel(UIControlledApplication application, string tabName)
+        {
+            // Get the path of the current assembly.
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            // Set the icon for the second button.
-            Uri uri2 = new Uri(@"D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\Resources\information.png");
-            BitmapImage bitmap2 = new BitmapImage(uri2);
-            button2.LargeImage = bitmap2;
+            // Create a panel on the tab
+            RibbonPanel modelPanel = application.CreateRibbonPanel(tabName, "Model");
 
-            return Result.Succeeded;
+            // Add buttons to the panel
+            CreateButton(modelPanel, thisAssemblyPath, "Fill parameter", "MyRevitPlugin.Command", "Fills a chosen parameter according to an excel table", "information.png");
+            CreateButton(modelPanel, thisAssemblyPath, "Slab rotator", "MyRevitPlugin.Command", "Rotates slab direction according to parameter", "information.png");
+            CreateButton(modelPanel, thisAssemblyPath, "Fill Column Parameter", "MyRevitPlugin.Command", "Fills a PILAR RED parameter according to the geometry", "information.png");
+            CreateButton(modelPanel, thisAssemblyPath, "Create trusses", "MyRevitPlugin.Command", "Creation of trusses according to modeled lines", "information.png");
+            CreateButton(modelPanel, thisAssemblyPath, "Renumber", "MyRevitPlugin.Command", "Renumbers element titles according to geometric position", "information.png");
+            CreateButton(modelPanel, thisAssemblyPath, "Get coordinates", "MyRevitPlugin.Command", "Collects the coordinates of all columns and fills in the chosen parameters", "information.png");
+        }
+
+        void CreateDetailPanel(UIControlledApplication application, string tabName)
+        {
+            // Get the path of the current assembly.
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+
+            // Create a panel on the tab
+            RibbonPanel detailPanel = application.CreateRibbonPanel(tabName, "Detail");
+
+            // Add buttons to the panel
+            CreateButton(detailPanel, thisAssemblyPath, "Model dimension", "MyRevitPlugin.Command", "Put dimensions in all columns of the model in a view", "information.png");
+            CreateButton(detailPanel, thisAssemblyPath, "Link dimension", "MyRevitPlugin.Command", "Put dimensions in all columns from a link in a view", "information.png");
+            CreateButton(detailPanel, thisAssemblyPath, "Change column tag", "MyRevitPlugin.Command", "Change columns tag if the column geometry changes from a level to another", "information.png");
+            CreateButton(detailPanel, thisAssemblyPath, "Creating views", "MyRevitPlugin.Command", "Creates drawing views and links DWG's according to the selected folder", "information.png");
+            CreateButton(detailPanel, thisAssemblyPath, "Config views", "MyRevitPlugin.Command", "Configures the layer of views created in Creating views, for reinforcement documentation", "information.png");
+            CreateButton(detailPanel, thisAssemblyPath, "Creating sheets", "MyRevitPlugin.Command", "Creates sheets according to Creating views and fits the relevant sheet size", "information.png");
+        }
+
+        void CreateTablePanel(UIControlledApplication application, string tabName)
+        {
+            // Get the path of the current assembly.
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+
+            // Create a panel on the tab
+            RibbonPanel tablePanel = application.CreateRibbonPanel(tabName, "Table");
+
+            // Add buttons to the panel
+            CreateButton(tablePanel, thisAssemblyPath, "Duplicate concrete tables", "MyRevitPlugin.Command", "Duplicate, rename and change filters and table parameters", "information.png");
+            CreateButton(tablePanel, thisAssemblyPath, "Duplicate steel tables", "MyRevitPlugin.Command", "Duplicate, rename and change filters and table parameters", "information.png");
+        }
+
+        void CreatePlotPanel(UIControlledApplication application, string tabName)
+        {
+            // Get the path of the current assembly.
+            string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
+
+            // Create a panel on the tab
+            RibbonPanel plotPanel = application.CreateRibbonPanel(tabName, "Plot");
+
+            // Add buttons to the panel
+            CreateButton(plotPanel, thisAssemblyPath, "Revision", "MyRevitPlugin.Command", "Insert chosen revision into sheet list", "information.png");
+            CreateButton(plotPanel, thisAssemblyPath, "Plot dwg's", "MyRevitPlugin.Command", "Plot and rename dwg's according to configuration", "plot-dwg.png");
+            CreateButton(plotPanel, thisAssemblyPath, "Plot pdf's", "MyRevitPlugin.Command", "Plot and rename pdf's according to configuration", "plot-pdf.png");
+            CreateButton(plotPanel, thisAssemblyPath, "Purge lines", "MyRevitPlugin.Command", "Deletes line patterns that have a name starting in (input)", "information.png");
+            CreateButton(plotPanel, thisAssemblyPath, "Sheets ids", "MyRevitPlugin.Command", "Extracts an .xls listing all sheets and their respective IDs", "information.png");
         }
     }
 }
