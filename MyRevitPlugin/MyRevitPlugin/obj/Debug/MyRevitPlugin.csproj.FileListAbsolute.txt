@@ -169,8 +169,11 @@ D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\bin\Debug\ru-RU
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\bin\Debug\zh-CN\AdWindows.resources.dll
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\bin\Debug\zh-TW\AdWindows.resources.dll
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.csproj.AssemblyReference.cache
-D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.g.resources
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.csproj.CoreCompileInputs.cache
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitP.54282C2F.Up2Date
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.dll
 D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.pdb
+D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.InfoForm.resources
+D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.Properties.Resources.resources
+D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.csproj.GenerateResource.cache
+D:\PROGRAMAÇÃO (GIT)\revit-plugins\MyRevitPlugin\MyRevitPlugin\obj\Debug\MyRevitPlugin.RevisionForm.resources
